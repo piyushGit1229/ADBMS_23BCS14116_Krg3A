@@ -1,0 +1,33 @@
+CREATE TABLE AUTHOR (
+    AUTHOR_ID INT PRIMARY KEY,
+    AUTHOR_NAME VARCHAR(20),
+    COUNTRY VARCHAR(20)
+);
+
+CREATE TABLE BOOK (
+    BOOK_ID INT PRIMARY KEY,
+    BOOK_TITLE VARCHAR(20),
+    AUTHOR_ID INT,
+    FOREIGN KEY (AUTHOR_ID) REFERENCES AUTHOR(AUTHOR_ID)
+);
+
+INSERT INTO AUTHOR (AUTHOR_ID, AUTHOR_NAME, COUNTRY) VALUES
+    (1, 'Haruki Murakami', 'Japan'),
+    (2, 'Chimamanda Ngozi', 'Nigeria'),
+    (3, 'Gabriel Garcia', 'Colombia');
+
+INSERT INTO BOOK (BOOK_ID, BOOK_TITLE, AUTHOR_ID) VALUES
+    (101, 'Kafka on the Shore', 1),
+    (102, 'Half of a Yellow Sun', 2),
+    (103, 'One Hundred Years', 3);
+
+SELECT
+    A.AUTHOR_NAME,
+    A.COUNTRY,
+    B.BOOK_TITLE
+FROM
+    AUTHOR AS A
+INNER JOIN
+    BOOK AS B
+ON
+    A.AUTHOR_ID = B.AUTHOR_ID;
